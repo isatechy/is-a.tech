@@ -33,7 +33,7 @@ export async function Header(): Promise<JSX.Element> {
           className="flex items-center justify-center gap-2 text-lg font-bold tracking-wide transition-all duration-300 ease-in-out"
         >
           <Icons.dns className="size-6 md:hidden lg:flex" />
-          <span className="hidden md:flex">{siteConfig.name}</span>
+          <span className="font-rowdies flex">{siteConfig.name}</span>
         </Link>
         <Navigation navItems={siteConfig.navItems} />
         <div className="flex items-center justify-center">

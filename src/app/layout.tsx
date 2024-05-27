@@ -6,7 +6,7 @@ import type { Metadata, Viewport } from "next"
 import { Analytics } from "@vercel/analytics/react"
 
 import { env } from "@/env.mjs"
-import { fontHeading, fontInter, fontUrbanist } from "@/config/fonts"
+import { fontHeading, fontRowdies } from "@/config/fonts"
 import { siteConfig } from "@/config/site"
 
 import { SmoothScrollProvider } from "@/providers/smooth-scroll-provider"
@@ -63,9 +63,14 @@ export const metadata: Metadata = {
     creator: siteConfig.author,
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      {
+        type: "image/svg+xml",
+        url: "/favicon.svg",
+      },
+    ],
   },
-  // manifest: `${siteConfig.url}/site.webmanifest`,
+  // manifest: `${process.env.NEXT_PUBLIC_APP_URL as string}/site.webmanifest`,
 }
 
 interface RootLayoutProps {
@@ -82,9 +87,8 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
       <body
         className={cn(
           "w-full bg-background font-sans antialiased",
-          fontInter.variable,
-          fontUrbanist.variable,
-          fontHeading.variable
+          fontHeading.variable,
+          fontRowdies.variable
         )}
       >
         <SmoothScrollProvider>

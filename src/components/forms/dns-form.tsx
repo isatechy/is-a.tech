@@ -59,8 +59,6 @@ export function DnsForm(): JSX.Element {
       try {
         const message = await createNewDns(formData)
 
-        console.log({ message })
-
         switch (message) {
           case "success":
             toast({

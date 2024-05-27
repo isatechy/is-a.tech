@@ -69,8 +69,6 @@ export default {
             subject: `${siteConfig.name} magic link sign in`,
             react: MagicLinkEmail({ identifier, url }),
           })
-
-          console.log("Verification email sent")
         } catch (error) {
           throw new Error("Failed to send verification email")
         }

@@ -15,24 +15,24 @@ import {
 import { env } from "@/env.mjs"
 
 export function NewsletterWelcomeEmail(): JSX.Element {
-  const previewText = "Hello and welcome to is-a.Tech!"
+  const previewText = "Hello and welcome to is-a.tech!"
 
   return (
     <Html>
       <Head>
-        <title>is-a.Tech Newsletter</title>
+        <title>is-a.tech Newsletter</title>
       </Head>
       <Preview>{previewText}</Preview>
       <Tailwind>
         <Body className="mx-auto bg-zinc-50 font-sans">
           <Container className="mx-auto my-[40px] max-w-2xl rounded p-4">
             <Section className="mt-4">
-              <Heading className="text-center text-2xl font-semibold text-zinc-950">
-                is-a.Tech
+              <Heading className="font-rowdies text-center text-2xl font-semibold text-zinc-950">
+                is-a.tech
               </Heading>
               <Hr className="my-4" />
               <Heading className="text-center text-3xl font-semibold text-zinc-800">
-                Welcome to is-a.Tech!
+                Welcome to is-a.tech!
               </Heading>
               <Text className="mb-0 mt-6 text-center text-base">
                 {`We're`} so glad {`you're`} here. {`We're`} excited to share

@@ -60,6 +60,7 @@ export async function createNewDns(
     const data = (await response.json()) as typeof dnsResponseSchema
 
     console.log({ data })
+    // add on prisma
 
     return "success"
   } catch (error) {

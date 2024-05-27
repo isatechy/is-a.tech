@@ -71,7 +71,7 @@ export function NavigationMobile({ navItems }: NavigationMobileProps) {
             onClick={() => setIsOpen(false)}
           >
             <Icons.dns className="mr-2 size-8" aria-hidden="true" />
-            <span className="text-2xl font-bold leading-none tracking-wide">
+            <span className="font-rowdies text-2xl font-bold leading-none tracking-wide">
               {siteConfig.name}
             </span>
             <span className="sr-only">Home</span>
