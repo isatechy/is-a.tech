@@ -50,6 +50,8 @@ export function NavigationMobile({ navItems }: NavigationMobileProps) {
   const segment = useSelectedLayoutSegment()
   const [isOpen, setIsOpen] = React.useState<boolean>(false)
 
+  if (!navItems.length) return null
+
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild className="transition-all duration-300 ease-in-out">
@@ -68,7 +70,7 @@ export function NavigationMobile({ navItems }: NavigationMobileProps) {
             className="flex items-center gap-2"
             onClick={() => setIsOpen(false)}
           >
-            <Icons.rocket className="mr-2 size-8" aria-hidden="true" />
+            <Icons.dns className="mr-2 size-8" aria-hidden="true" />
             <span className="text-2xl font-bold leading-none tracking-wide">
               {siteConfig.name}
             </span>

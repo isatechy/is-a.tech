@@ -74,10 +74,14 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
   return (
-    <html lang="en" className="overflow-x-hidden overflow-y-scroll">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className="overflow-x-hidden overflow-y-scroll"
+    >
       <body
         className={cn(
-          "w-full bg-background bg-gradient-to-r from-background to-pink-400/10 font-sans antialiased",
+          "w-full bg-background font-sans antialiased",
           fontInter.variable,
           fontUrbanist.variable,
           fontHeading.variable

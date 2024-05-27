@@ -20,6 +20,8 @@ export const env = createEnv({
     RESEND_HOST: z.string(),
     RESEND_USERNAME: z.string(),
     RESEND_PORT: z.string(),
+    CF_API_KEY: z.string(),
+    CF_ZONE_ID: z.string(),
   },
 
   /**
@@ -50,5 +52,7 @@ export const env = createEnv({
     RESEND_HOST: process.env.RESEND_HOST,
     RESEND_USERNAME: process.env.RESEND_USERNAME,
     RESEND_PORT: process.env.RESEND_PORT,
+    CF_API_KEY: process.env.CF_API_KEY,
+    CF_ZONE_ID: process.env.CF_ZONE_ID,
   },
 })

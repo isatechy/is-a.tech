@@ -41,7 +41,7 @@ export async function HeroSection() {
           <Balancer>
             Fast-Track Your Business Launch with{" "}
             <span className="bg-gradient-to-r from-pink-600 to-purple-400 bg-clip-text font-extrabold text-transparent">
-              SaaSy Land
+              is-a.Tech
             </span>
           </Balancer>
         </h1>
