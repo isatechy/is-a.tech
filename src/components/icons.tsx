@@ -1,4 +1,7 @@
-type IconProps = React.HTMLAttributes<SVGElement>
+import { type LucideIcon, type LucideProps } from "lucide-react"
+
+export type Icon = LucideIcon
+export type IconProps = LucideProps
 
 export const Icons = {
   arrowLeft: (props: IconProps) => (
@@ -101,6 +104,21 @@ export const Icons = {
     >
       <path d="M18 6 6 18" />
       <path d="m6 6 12 12" />
+    </svg>
+  ),
+
+  ghost: (props: IconProps) => (
+    <svg {...props} stroke="currentColor" viewBox="0 0 24 24">
+      <path
+        fill="none"
+        d="M16 10.5c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5s.448-1.5 1-1.5s1 .672 1 1.5"
+      />
+      <ellipse fill="none" cx="9" cy="10.5" rx="1" ry="1.5" />
+      <path
+        strokeLinecap="round"
+        fill="none"
+        d="M22 12.3C22 6.613 17.523 2 12 2S2 6.612 2 12.3v7.423c0 1.322 1.351 2.182 2.5 1.591a2.82 2.82 0 0 1 2.896.186a2.822 2.822 0 0 0 3.208 0l.353-.242a1.836 1.836 0 0 1 2.086 0l.353.242a2.822 2.822 0 0 0 3.208 0a2.82 2.82 0 0 1 2.897-.186c1.148.591 2.499-.269 2.499-1.591v-3.711"
+      />
     </svg>
   ),
   check: (props: IconProps) => (
