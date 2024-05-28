@@ -1,6 +1,7 @@
 import Balancer from "react-wrap-balancer"
 
 import { DnsForm } from "@/components/forms/dns-form"
+import TypeAnimation from "@/components/type-animation"
 
 export function DnsSection(): JSX.Element {
   return (
@@ -18,8 +19,9 @@ export function DnsSection(): JSX.Element {
                 a free DNS record{" "}
               </span>
             </Balancer>
-            <span className="font-rowdies block font-bold text-yellow-700">
-              John.is-a.tech{" "}
+            <span className="block font-rowdies font-bold text-yellow-700">
+              <TypeAnimation />
+              .is-a.tech{" "}
             </span>
           </h2>
           <h3 className="max-w-2xl text-muted-foreground sm:text-xl sm:leading-8">

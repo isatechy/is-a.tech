@@ -115,6 +115,11 @@ module.exports = {
             opacity: 1,
           },
         },
+        cursor: {
+          "50%": {
+            opacity: 0,
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -123,6 +128,7 @@ module.exports = {
         "fade-down": "fade-down 0.5s",
         "fade-in": "fade-in 0.4s",
         "fade-out": "fade-out 0.4s",
+        cursor: "cursor 1.5s infinite step-start",
       },
     },
   },
