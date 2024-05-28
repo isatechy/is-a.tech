@@ -4,6 +4,7 @@ import "@/styles/mdx.css"
 import * as React from "react"
 import type { Metadata, Viewport } from "next"
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import { env } from "@/env.mjs"
 import { fontHeading, fontRowdies } from "@/config/fonts"
@@ -101,6 +102,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
             {children}
             <Toaster />
             <Analytics />
+            <SpeedInsights />
             <TailwindIndicator />
           </ThemeProvider>
         </SmoothScrollProvider>
