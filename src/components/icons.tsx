@@ -1,4 +1,5 @@
 import {
+  ArrowLeftIcon,
   Github,
   MoonIcon,
   SunIcon,
@@ -28,6 +29,7 @@ export const Icons = {
       />
     </svg>
   ),
+  arrowLeft: ArrowLeftIcon,
   settings: (props: IconProps) => (
     <svg
       {...props}

@@ -17,8 +17,8 @@
   },
   "type": "module",
   "scripts": {
-    "dev": "contentlayer build && next dev",
-    "build": "contentlayer build && next build",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
     "postinstall": "pnpm prisma generate",
     "db:generate": "pnpm prisma generate",
@@ -32,8 +32,8 @@
     "prettier:format": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
     "prettier:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache",
     "typecheck": "tsc --noEmit",
-    "lint": "contentlayer build && next lint",
-    "lint:fix": "contentlayer build && next lint --fix"
+    "lint": "next lint",
+    "lint:fix": "next lint --fix"
   },
   "dependencies": {
     "@auth/core": "^0.30.0",
@@ -105,18 +105,14 @@
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
-    "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.13",
     "@types/bcryptjs": "^2.4.6",
-    "@types/eslint": "^8.56.10",
-    "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.12.11",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
     "@types/ws": "^8.5.10",
     "@typescript-eslint/eslint-plugin": "^7.8.0",
     "@typescript-eslint/parser": "^7.8.0",
-    "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.3",
     "eslint-config-prettier": "^9.1.0",
@@ -125,12 +121,6 @@
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "prisma": "^5.13.0",
-    "rehype": "^13.0.1",
-    "rehype-autolink-headings": "^7.1.0",
-    "rehype-pretty-code": "^0.13.1",
-    "rehype-slug": "^6.0.0",
-    "remark": "^15.0.1",
-    "remark-gfm": "^4.0.0",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.5"
   },
