@@ -5,7 +5,7 @@ import { siteConfig } from "@/config/site"
 import auth from "@/lib/auth"
 import { cn } from "@/lib/utils"
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { buttonVariants } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -33,7 +33,7 @@ export async function Header(): Promise<JSX.Element> {
           className="flex items-center justify-center gap-2 text-lg font-bold tracking-wide transition-all duration-300 ease-in-out"
         >
           <Icons.dns className="size-6 md:hidden lg:flex" />
-          <span className="font-rowdies flex">{siteConfig.name}</span>
+          <span className="flex font-rowdies">{siteConfig.name}</span>
         </Link>
         <Navigation navItems={siteConfig.navItems} />
         <div className="flex items-center justify-center">
@@ -51,17 +51,9 @@ export async function Header(): Promise<JSX.Element> {
                   )}
                 >
                   <Avatar className="size-9">
-                    {session?.user.image ? (
-                      <AvatarImage
-                        src={session?.user.image}
-                        alt={session?.user.name ?? "user's profile picture"}
-                        className="size-7 rounded-full"
-                      />
-                    ) : (
-                      <AvatarFallback className="size-9 cursor-pointer p-1.5 text-xs capitalize">
-                        <Icons.user className="size-5 rounded-full" />
-                      </AvatarFallback>
-                    )}
+                    <AvatarFallback className="size-9 cursor-pointer p-1.5 text-xs capitalize">
+                      <Icons.user className="size-5 rounded-full" />
+                    </AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56" align="end" forceMount>
