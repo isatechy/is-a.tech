@@ -24,7 +24,7 @@ export async function createNewDns(
     redirect(DEFAULT_UNAUTHENTICATED_REDIRECT)
   }
 
-  if (session.user.email) {
+  if (!session.user.email) {
     return "user-notFound"
   }
 
@@ -48,7 +48,7 @@ export async function createNewDns(
     ttl: validatedInput.data.ttl,
     type: validatedInput.data.type,
     updatedAt: new Date(),
-    user: { connect: { email: session.user.email as string } },
+    user: { connect: { email: session.user.email } },
   }
 
   try {
@@ -116,6 +116,17 @@ export async function deleteDns(
       return "not-found"
     }
 
+    await fetch(
+      `https://api.cloudflare.com/client/v4/zones/${env.CF_ZONE_ID}/dns_records/${dns.cloudflareId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${env.CF_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+      }
+    )
+
     await prisma.dnsRecord.delete({
       where: { id },
     })
@@ -146,7 +157,7 @@ export async function getDnsRecords(): Promise<
       where: { userId: session.user.id },
     })
 
-    if (!dns) {
+    if (!dns || !dns.length) {
       return "not-found"
     }
 

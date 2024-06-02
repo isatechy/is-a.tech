@@ -1,8 +1,8 @@
-import { getDnsRecords } from "@/actions/dns"
-import type Prisma from "@prisma/client"
+import { revalidatePath } from "next/cache"
+import Link from "next/link"
+import { deleteDns, getDnsRecords } from "@/actions/dns"
 
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -12,65 +12,17 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Icons } from "@/components/icons"
+import TableCellsAll from "@/components/table-cells-all"
 
 export default async function AccountPage(): Promise<JSX.Element> {
   const alldns = await getDnsRecords()
-
-  const TableCellsAll = () => {
-    if (alldns === "not-found") {
-      return <TableCell colSpan={5}>No DNS records found</TableCell>
-    } else if (alldns === "error") {
-      return <TableCell colSpan={5}>Error fetching DNS records</TableCell>
-    } else {
-      return alldns.map((dns: Prisma.DnsRecord) => (
-        <>
-          <TableCell className="font-medium">{`${dns.name}.${dns.domain}`}</TableCell>
-          <TableCell>
-            <Badge variant="outline">{dns.type}</Badge>
-          </TableCell>
-          <TableCell>{dns.content}</TableCell>
-          <TableCell className="hidden md:table-cell">
-            {new Date(dns.createdAt).toLocaleDateString()}
-          </TableCell>
-          <TableCell>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  aria-haspopup="true"
-                  size="icon"
-                  variant="ghost"
-                  className="border-0"
-                >
-                  <Icons.moreHorizontal className="size-4" />
-                  <span className="sr-only">Toggle menu</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                <DropdownMenuItem>Edit</DropdownMenuItem>
-                <DropdownMenuItem>Delete</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </TableCell>
-        </>
-      ))
-    }
-  }
+  revalidatePath("/dashboard/account")
 
   return (
     <Card className="container relative max-w-2xl items-center justify-center p-2">
@@ -81,7 +33,13 @@ export default async function AccountPage(): Promise<JSX.Element> {
         </CardDescription>
       </CardHeader>
       <CardFooter>
-        <Button>Create a new DNS</Button>
+        <Link
+          aria-label="Back to initial page"
+          href="/"
+          className={buttonVariants({ variant: "default" })}
+        >
+          Create a new DNS
+        </Link>
       </CardFooter>
       <CardContent>
         <Table>
@@ -98,7 +56,7 @@ export default async function AccountPage(): Promise<JSX.Element> {
           </TableHeader>
           <TableBody>
             <TableRow>
-              <TableCellsAll />
+              <TableCellsAll dns={alldns} deleteDns={deleteDns} />
             </TableRow>
           </TableBody>
         </Table>

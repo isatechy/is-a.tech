@@ -377,6 +377,7 @@ export function DnsForm(): JSX.Element {
         <Button
           variant="outline"
           className="h-14 border bg-primary text-lg font-bold tracking-wide text-secondary hover:opacity-70"
+          disabled={isPending}
         >
           {isPending && (
             <Icons.spinner

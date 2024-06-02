@@ -41,7 +41,3 @@ To contribute to the project or report issues, you can make a pull request in ou
 ---
 
 Thanks to **[Cloudflare](https://www.cloudflare.com)** for their incredible DNS service that makes this service possible. Thank you very much!
-
----END OF README---
-
-Espero que esto te sea útil. Si necesitas más ajustes o tienes alguna otra solicitud, no dudes en decírmelo.
