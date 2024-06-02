@@ -59,19 +59,21 @@ model User {
 }
 
 model DnsRecord {
-  content   String
-  createdAt DateTime @default(now()) @map("created_at")
-  disabled  Boolean  @default(false)
-  domain    String
-  id        String   @id @default(cuid())
-  name      String
-  order     Int?
-  priority  Int?
-  ttl       Int
-  type      String
-  updatedAt DateTime @default(now()) @map("updated_at")
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String   @map("user_id")
+  content       String
+  createdAt     DateTime    @default(now()) @map("created_at")
+  disabled      Boolean     @default(false)
+  domain        String
+  id            String      @id @default(cuid())
+  name          String
+  order         Int?
+  priority      Int? 
+  ttl           Int         @default(1)
+  type          String      @default("CNAME")
+  cloudflareId  String?     @map("cloudflare_id")
+  zoneId        String?     @map("zone_id")
+  updatedAt     DateTime    @default(now()) @map("updated_at")
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        String      @map("user_id")
 
   @@map("dns_records")
 }

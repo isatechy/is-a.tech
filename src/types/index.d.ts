@@ -1,82 +1,84 @@
-import type { Account, Profile, Session, User } from "next-auth"
-import type { JWT } from "next-auth/jwt"
-
 export interface NavItem {
   title: string
   href: string
   disabled?: boolean
 }
 
-export interface NavItemFooter {
-  title: string
-  items: {
-    title: string
-    href: string
-    external?: boolean
-  }[]
+export interface DNSList {
+  result?: ResultEntity[] | null
+  success: boolean
+  errors?: null[] | null
+  messages?: null[] | null
+  result_info: ResultInfo
 }
-
-export interface SessionCallbackParams {
-  session: Session
-  token: JWT
-  user: User
-}
-
-export interface JWTCallbackParams {
-  token: JWT
-  user?: User | undefined
-  account?: Account | null | undefined
-  profile?: Profile | undefined
-  isNewUser?: boolean | undefined
-}
-
-export interface BlogPostParamsProps {
-  params: {
-    slug: string[]
-  }
-}
-
-export interface PricingPlan {
-  id: "basic" | "standard" | "premium"
+export interface ResultEntity {
+  id: string
+  zone_id: string
+  zone_name: string
   name: string
-  description: string
-  features: string[]
-  limitations: string[]
-  stripePriceId: string
-  prices: {
-    monthly: number
-    yearly: number
-  }
-  stripeIds: {
-    monthly?: string
-    yearly?: string
-  }
+  type: string
+  content: string
+  proxiable: boolean
+  proxied: boolean
+  ttl: number
+  locked: boolean
+  meta: Meta
+  comment?: string | null
+  tags?: null[] | null
+  created_on: string
+  modified_on: string
+  priority?: number | null
+  data?: Data | null
 }
-
-export interface UserSubscriptionPlan extends SubscriptionPlan {
-  stripeSubscriptionId?: string | null
-  stripeCurrentPeriodEnd?: string | null
-  stripeCustomerId?: string | null
-  isSubscribed: boolean
-  isCanceled: boolean
-  isActive: boolean
+export interface Meta {
+  auto_added: boolean
+  managed_by_apps: boolean
+  managed_by_argo_tunnel: boolean
 }
-
-export interface FrequentlyAskedQuestion {
-  question: string
-  answer: string
-}
-
-export interface Feature {
-  title: string
-  description: string
-  image: string
-}
-
-export interface Testimonial {
-  title: string
-  body: string
+export interface Data {
   name: string
-  role: string
-  avatar: string
+  port: number
+  priority: number
+  proto: string
+  service: string
+  target: string
+  weight: number
+}
+export interface ResultInfo {
+  page: number
+  per_page: number
+  count: number
+  total_count: number
+  total_pages: number
+}
+
+export interface DNSCreate {
+  result: Result
+  success: boolean
+  errors?: null[] | null
+  messages?: null[] | null
+}
+
+export interface Result {
+  id: string
+  zone_id: string
+  zone_name: string
+  name: string
+  type: string
+  content: string
+  proxiable: boolean
+  proxied: boolean
+  ttl: number
+  locked: boolean
+  meta: Meta
+  comment: string
+  tags?: null[] | null
+  created_on: string
+  modified_on: string
+}
+
+export interface Meta {
+  auto_added: boolean
+  managed_by_apps: boolean
+  managed_by_argo_tunnel: boolean
 }

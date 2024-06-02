@@ -129,11 +129,10 @@ export const dnsResponseSchema = z.object({
   messages: z.array(z.string()),
 })
 
-export const dnsSchemaWhitEmail = dnsSchema.extend({
-  email: emailSchema,
+export const dnsSchemaCompleted = dnsSchema.extend({
   ipv4: ipv4Schema,
   ipv6: ipv6Schema,
   url: urlSchema,
   ns: z.string().optional(),
 })
-export type DnsSchemaWhitEmail = z.infer<typeof dnsSchemaWhitEmail>
+export type DnsSchemaCompleted = z.infer<typeof dnsSchemaCompleted>

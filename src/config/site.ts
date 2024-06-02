@@ -1,4 +1,4 @@
-import { type NavItem, type NavItemFooter } from "@/types"
+import { type NavItem } from "@/types"
 
 const links = {
   github: "https://github.com/isatechy/is-a.tech",
@@ -7,7 +7,6 @@ const links = {
   discord: "",
   authorsWebsite: "https://joca.dev",
   authorsGitHub: "https://github.com/gantit",
-  openGraphImage: "https://saasyland.com/images/opengraph-image.png",
 }
 
 export const siteConfig = {
@@ -26,6 +25,4 @@ export const siteConfig = {
     "free subdomain",
   ],
   navItems: [] satisfies NavItem[],
-  navItemsMobile: [],
-  navItemsFooter: [] satisfies NavItemFooter[],
 }

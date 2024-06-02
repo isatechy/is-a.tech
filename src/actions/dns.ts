@@ -1,25 +1,31 @@
 "use server"
 
 import { redirect } from "next/navigation"
+import { type DNSCreate } from "@/types"
+import type Prisma from "@prisma/client"
 
 import { env } from "@/env.mjs"
 import { prisma } from "@/config/db"
 import { DEFAULT_UNAUTHENTICATED_REDIRECT } from "@/config/defaults"
-import { dnsSchemaWhitEmail, type DnsSchemaWhitEmail } from "@/validations/dns"
+import { dnsSchemaCompleted, type DnsSchemaCompleted } from "@/validations/dns"
 
 import auth from "@/lib/auth"
 
 export async function createNewDns(
-  rawInput: DnsSchemaWhitEmail
+  rawInput: DnsSchemaCompleted
 ): Promise<
   "invalid-input" | "not-found" | "error" | "success" | "user-notFound"
 > {
-  const validatedInput = dnsSchemaWhitEmail.safeParse(rawInput)
+  const validatedInput = dnsSchemaCompleted.safeParse(rawInput)
 
   if (!validatedInput.success) return "invalid-input"
   const session = await auth()
   if (!session) {
     redirect(DEFAULT_UNAUTHENTICATED_REDIRECT)
+  }
+
+  if (session.user.email) {
+    return "user-notFound"
   }
 
   const content =
@@ -30,8 +36,6 @@ export async function createNewDns(
     validatedInput.data.ipv6
 
   if (!content) return "invalid-input"
-
-  const email = session.user.email || validatedInput.data.email
 
   const DataDb = {
     content,
@@ -44,35 +48,7 @@ export async function createNewDns(
     ttl: validatedInput.data.ttl,
     type: validatedInput.data.type,
     updatedAt: new Date(),
-    user: {
-      connect: {
-        email,
-      },
-    },
-  }
-
-  try {
-    const user = await prisma.user.findUnique({
-      where: { email: email },
-    })
-
-    if (!user) {
-      throw new Error(
-        `No se encontró un usuario con el correo electrónico: ${email}`
-      )
-    }
-
-    await prisma.dnsRecord.create({
-      data: DataDb,
-    })
-  } catch (error) {
-    await prisma.error.create({
-      data: {
-        message: "[dnsRecord]" + email + JSON.stringify(error),
-        createdAt: new Date(),
-      },
-    })
-    return "error"
+    user: { connect: { email: session.user.email as string } },
   }
 
   try {
@@ -81,12 +57,12 @@ export async function createNewDns(
       name: `${validatedInput.data.name}.is-a.tech`,
       proxied: validatedInput.data.proxied,
       type: validatedInput.data.type,
-      comment: `Domain verification record created by ${email}`,
+      comment: `Domain verification record created by ${session.user.id}`,
       tags: validatedInput.data.tags,
       ttl: validatedInput.data.ttl,
     }
 
-    await fetch(
+    const result = await fetch(
       `https://api.cloudflare.com/client/v4/zones/${env.CF_ZONE_ID}/dns_records`,
       {
         method: "POST",
@@ -97,12 +73,22 @@ export async function createNewDns(
         body: JSON.stringify(newDns),
       }
     )
+    const data = (await result.json()) as DNSCreate
+
+    await prisma.dnsRecord.create({
+      data: {
+        ...DataDb,
+        cloudflareId: data.result.id,
+        zoneId: data.result.zone_id,
+      },
+    })
 
     return "success"
   } catch (error) {
+    console.log(error)
     await prisma.error.create({
       data: {
-        message: "[dnsRecord cloudflare]" + email + JSON.stringify(error),
+        message: `[dnsRecord cloudflare] - ${session.user.id}  ${JSON.stringify(error)}`,
         createdAt: new Date(),
       },
     })
@@ -110,5 +96,69 @@ export async function createNewDns(
     throw new Error("Error resending email verification link")
   } finally {
     console.log("DNS record created")
+  }
+}
+
+export async function deleteDns(
+  id: string
+): Promise<"not-found" | "error" | "success"> {
+  const session = await auth()
+  if (!session) {
+    redirect(DEFAULT_UNAUTHENTICATED_REDIRECT)
+  }
+
+  try {
+    const dns = await prisma.dnsRecord.findUnique({
+      where: { id },
+    })
+
+    if (!dns) {
+      return "not-found"
+    }
+
+    await prisma.dnsRecord.delete({
+      where: { id },
+    })
+
+    return "success"
+  } catch (error) {
+    await prisma.error.create({
+      data: {
+        message: "[deleteDns]" + JSON.stringify(error),
+        createdAt: new Date(),
+      },
+    })
+
+    return "error"
+  }
+}
+
+export async function getDnsRecords(): Promise<
+  "not-found" | "error" | Prisma.DnsRecord[]
+> {
+  const session = await auth()
+  if (!session) {
+    redirect(DEFAULT_UNAUTHENTICATED_REDIRECT)
+  }
+
+  try {
+    const dns = await prisma.dnsRecord.findMany({
+      where: { userId: session.user.id },
+    })
+
+    if (!dns) {
+      return "not-found"
+    }
+
+    return dns
+  } catch (error) {
+    await prisma.error.create({
+      data: {
+        message: "[getDnsRecords]" + JSON.stringify(error),
+        createdAt: new Date(),
+      },
+    })
+
+    return "error"
   }
 }

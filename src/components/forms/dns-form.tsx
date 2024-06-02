@@ -6,9 +6,9 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
 import {
-  dnsSchemaWhitEmail,
+  dnsSchemaCompleted,
   TYPES,
-  type DnsSchemaWhitEmail,
+  type DnsSchemaCompleted,
   type DnsType,
 } from "@/validations/dns"
 
@@ -40,10 +40,9 @@ export function DnsForm(): JSX.Element {
   const [isPending, startTransition] = React.useTransition()
   const [defaultType, setDefaultType] = React.useState<DnsType>("CNAME")
 
-  const form = useForm<DnsSchemaWhitEmail>({
-    resolver: zodResolver(dnsSchemaWhitEmail),
+  const form = useForm<DnsSchemaCompleted>({
+    resolver: zodResolver(dnsSchemaCompleted),
     defaultValues: {
-      email: "",
       name: "",
       content: "",
       type: "CNAME",
@@ -54,7 +53,7 @@ export function DnsForm(): JSX.Element {
     },
   })
 
-  function onSubmit(formData: DnsSchemaWhitEmail): void {
+  const onSubmit = (formData: DnsSchemaCompleted): void => {
     startTransition(async () => {
       try {
         const message = await createNewDns(formData)
@@ -148,12 +147,6 @@ export function DnsForm(): JSX.Element {
     },
   ]
 
-  const SetColor = ({
-    children,
-  }: {
-    children: React.ReactNode
-  }): JSX.Element => <span className="text-yellow-400"> {children} </span>
-
   return (
     <Form {...form}>
       <form
@@ -176,7 +169,7 @@ export function DnsForm(): JSX.Element {
                 >
                   <FormControl className="h-12">
                     <SelectTrigger>
-                      <SelectValue placeholder="Select a verified email to display" />
+                      <SelectValue placeholder="Select a verified DNS to display" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -379,20 +372,6 @@ export function DnsForm(): JSX.Element {
               />
             </>
           )}
-
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl className="h-12">
-                  <Input type="email" placeholder="john@smith.com" {...field} />
-                </FormControl>
-                <FormMessage className="pt-2 sm:text-sm" />
-              </FormItem>
-            )}
-          />
         </div>
 
         <Button

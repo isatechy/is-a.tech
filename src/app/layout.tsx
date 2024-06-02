@@ -59,7 +59,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: [siteConfig.links.openGraphImage],
     creator: siteConfig.author,
   },
   icons: {

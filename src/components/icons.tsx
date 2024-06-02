@@ -2,6 +2,7 @@ import {
   ArrowLeftIcon,
   Github,
   MoonIcon,
+  MoreHorizontalIcon,
   SunIcon,
   User2Icon,
   type LucideIcon,
@@ -12,6 +13,7 @@ export type Icon = LucideIcon
 export type IconProps = LucideProps
 
 export const Icons = {
+  moreHorizontal: MoreHorizontalIcon,
   avatar: (props: IconProps) => (
     <svg
       {...props}
