@@ -69,7 +69,7 @@ export async function Header(): Promise<JSX.Element> {
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuGroup>
-                    <DropdownMenuItem asChild disabled>
+                    <DropdownMenuItem asChild>
                       <Link href="/dashboard/account">
                         <Icons.avatar
                           className="mr-2 size-4"

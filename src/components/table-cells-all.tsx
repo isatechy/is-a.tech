@@ -54,7 +54,12 @@ const TableCellsAll = ({
       </TableCell>
       <TableCell>{dns.content}</TableCell>
       <TableCell className="hidden md:table-cell">
-        {new Date(dns.createdAt).toLocaleDateString()}
+        {new Date(dns.createdAt).toLocaleDateString("en-US", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
       </TableCell>
       <TableCell>
         <DropdownMenu>

@@ -58,6 +58,8 @@ export function DnsForm(): JSX.Element {
       try {
         const message = await createNewDns(formData)
 
+        console.log({ message })
+
         switch (message) {
           case "success":
             toast({
@@ -65,6 +67,13 @@ export function DnsForm(): JSX.Element {
               description: "Your message has been sent",
             })
             form.reset()
+            break
+          case "invalid-input":
+            toast({
+              title: "error",
+              description: "Dns Exist",
+              variant: "destructive",
+            })
             break
           default:
             toast({
@@ -74,6 +83,7 @@ export function DnsForm(): JSX.Element {
             })
         }
       } catch (error) {
+        console.error({ error })
         toast({
           description: "Something went wrong. Please try again",
           variant: "destructive",

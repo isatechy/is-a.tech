@@ -22,7 +22,17 @@ import TableCellsAll from "@/components/table-cells-all"
 
 export default async function AccountPage(): Promise<JSX.Element> {
   const alldns = await getDnsRecords()
-  revalidatePath("/dashboard/account")
+
+  const handleDeleteDns = async (
+    id: string
+  ): Promise<"not-found" | "error" | "success"> => {
+    "use server"
+    const result = await deleteDns(id)
+    if (result === "success") {
+      revalidatePath("/dashboard/account")
+    }
+    return result
+  }
 
   return (
     <Card className="container relative max-w-2xl items-center justify-center p-2">
@@ -56,7 +66,7 @@ export default async function AccountPage(): Promise<JSX.Element> {
           </TableHeader>
           <TableBody>
             <TableRow>
-              <TableCellsAll dns={alldns} deleteDns={deleteDns} />
+              <TableCellsAll dns={alldns} deleteDns={handleDeleteDns} />
             </TableRow>
           </TableBody>
         </Table>

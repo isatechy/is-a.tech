@@ -51,13 +51,15 @@ export async function createNewDns(
     user: { connect: { email: session.user.email } },
   }
 
+  let data = {} as DNSCreate
+
   try {
     const newDns = {
       content,
       name: `${validatedInput.data.name}.is-a.tech`,
       proxied: validatedInput.data.proxied,
       type: validatedInput.data.type,
-      comment: `Domain verification record created by ${session.user.id}`,
+      comment: `Domain verification record created by ${session.user.email}`,
       tags: validatedInput.data.tags,
       ttl: validatedInput.data.ttl,
     }
@@ -73,8 +75,27 @@ export async function createNewDns(
         body: JSON.stringify(newDns),
       }
     )
-    const data = (await result.json()) as DNSCreate
+    data = (await result.json()) as DNSCreate
 
+    if (data.success === false) {
+      await prisma.error.create({
+        data: {
+          message: `[dnsRecord cloudflare] - ${session.user.email}  ${JSON.stringify(data)}`,
+          createdAt: new Date(),
+        },
+      })
+      return "invalid-input"
+    }
+  } catch (error) {
+    await prisma.error.create({
+      data: {
+        message: `[dnsRecord cloudflare] - ${session.user.email}  ${JSON.stringify(error)}`,
+        createdAt: new Date(),
+      },
+    })
+  }
+
+  try {
     await prisma.dnsRecord.create({
       data: {
         ...DataDb,
@@ -85,17 +106,14 @@ export async function createNewDns(
 
     return "success"
   } catch (error) {
-    console.log(error)
     await prisma.error.create({
       data: {
-        message: `[dnsRecord cloudflare] - ${session.user.id}  ${JSON.stringify(error)}`,
+        message: `[dnsRecord prisma] - ${session.user.id}  ${JSON.stringify(error)}`,
         createdAt: new Date(),
       },
     })
 
     throw new Error("Error resending email verification link")
-  } finally {
-    console.log("DNS record created")
   }
 }
 
