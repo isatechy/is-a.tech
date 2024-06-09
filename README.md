@@ -1,36 +1,43 @@
-[<div href="/"><svg width=40 viewBox="0 0 24 24" fill="black" ><path d="M4.5 17.5h2v3h-2z"></path><path d="M20.998 14H3.002A2 2 0 0 0 1 16.002v5.996A2 2 0 0 0 3.002 24h17.996A2 2 0 0 0 23 21.998v-5.996A2 2 0 0 0 20.998 14M8 20.5A1.473 1.473 0 0 1 6.5 22H3v-6h3.5A1.473 1.473 0 0 1 8 17.5Zm6.5 1.5h-1.2l-2.55-3.5V22H9.5v-6h1.25l2.5 3.5V16h1.25Zm6.5-4.48h-3.5v.74H20a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1h-4v-1.5h3.51v-.74H17a1 1 0 0 1-1-1V17a1 1 0 0 1 1-1h4ZM4.26 12A8.2 8.2 0 0 1 4 10a8.2 8.2 0 0 1 .26-2h3.38a17 17 0 0 0-.14 2 17 17 0 0 0 .14 2h2.02a15 15 0 0 1-.16-2 15 15 0 0 1 .16-2h4.68a15 15 0 0 1 .16 2 15 15 0 0 1-.16 2h2.02a17 17 0 0 0 .14-2 17 17 0 0 0-.14-2h3.38a8.2 8.2 0 0 1 .26 2 8.2 8.2 0 0 1-.26 2h2.059A10 10 0 1 0 2.2 12Zm14.66-6h-2.95a15.7 15.7 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.92 6M12 2.04A14.1 14.1 0 0 1 13.91 6h-3.82A14.1 14.1 0 0 1 12 2.04m-2.59.4A15.7 15.7 0 0 0 8.03 6H5.08a8 8 0 0 1 4.33-3.56"></path></svg><span style="color:black">is-a.tech</span></div>](https://is-a.tech/)
+[![IS-A.TECH](https://img.shields.io/badge/is--a.tech-DNS-1F87FF.svg?style=flat-square)](http://is-a.tech)
+[![PRs](https://img.shields.io/github/issues-pr-closed-raw/isatechy/is-a.tech.svg?style=flat-square&colorB=FF4500&label=pull%20requests)](https://github.com/isatechy/is-a.tech/pulls?q=is%3Apr+is%3Aclosed+label%3Aadd)
+[![Contributors](https://img.shields.io/github/contributors-anon/isatechy/is-a.tech?color=FF4500&style=flat-square)](https://github.com/isatechy/is-a.tech/graphs/contributors)
+[![Activity](https://img.shields.io/github/commit-activity/m/isatechy/is-a.tech?color=FF4500&style=flat-square)](https://github.com/isatechy/is-a.tech/pulse/monthly)
 
-Is a service that allows you to get a free DNS record for your domain.
+---
 
-## Features
+## Create a Custom Subdomain
 
-- **Free DNS Record**: Create a DNS record in the format `yourdomain.is-a.tech`.
-- **Ownership Verification**: Verify the ownership of your domain by creating a DNS record.
+To get a short and sleek subdomain for your website using **is-a.tech**, follow these steps:
 
-## How to Use
+### Step 1
 
-1. **Select the DNS Record Type**:
+Go to the [is-a.tech homepage](http://is-a.tech) and fill out the form to create your custom subdomain. For example, if your name is Luis, you could create `luis.is-a.tech`.
 
-   - Choose the type of record you want to create (e.g., A, CNAME, etc.).
+### Step 2
 
-2. **Specify the Name**:
+In the form, enter the URL that you want your subdomain to point to. This could be a GitHub Pages URL, a website hosted on another platform, or any other URL you want to use.
 
-   - Provide the name of the subdomain you want (e.g., `john.is-a.tech`).
+### Step 3
 
-3. **Specify the Target**:
-   - Provide the target of the record (e.g., `www.example.com`).
+After submitting the form, your subdomain will be automatically created and should be active within a short period of time. If you encounter any issues, check the [FAQ section](http://is-a.tech/faq) or open an issue in our [GitHub repository](https://github.com/isatechy/is-a.tech/issues).
 
-## Example
+### Step 4
 
-If you want to create a record for your domain `john.is-a.tech` that points to `www.example.com`, you need to specify:
+To contribute to the project or report issues, you can make a pull request in our [GitHub repository](https://github.com/isatechy/is-a.tech). We appreciate any improvements or corrections you can offer.
 
-- **Name**: john
-- **Target**: www.example.com
+---
 
-## Contributing
+> [!IMPORTANT]
+> Please note that there are some rules that apply to the content of websites hosted on is-a.tech subdomains:
+>
+> **Websites must be directly related to technology or the tech community (e.g., open-source projects, tech tools, personal pages, or portfolios)**
+>
+> - Sites that incite bad practices or abusive content are not allowed.
+> - No automatic redirects away from the **is-a.tech** domain. Redirects must require user interaction.
+> - No unrelated content. Websites must stay focused on their intended topic or purpose.
+>
+> _Additionally, please be aware of our full [Terms and Conditions](https://is-a.tech/t&c) for the is-a.tech service._
 
-If you want to contribute to this project, please submit a pull request or open an issue in the repository.
+---
 
-## License
-
-This project is licensed under the MIT License.
+Thanks to **[Cloudflare](https://www.cloudflare.com)** for their incredible DNS service that makes this service possible. Thank you very much!
