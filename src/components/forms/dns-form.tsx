@@ -71,6 +71,13 @@ export function DnsForm(): JSX.Element {
           case "invalid-input":
             toast({
               title: "error",
+              description: "Invalid input",
+              variant: "destructive",
+            })
+            break
+          case "already-exists":
+            toast({
+              title: "error",
               description: "Dns Exist",
               variant: "destructive",
             })

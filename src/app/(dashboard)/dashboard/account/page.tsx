@@ -65,9 +65,7 @@ export default async function AccountPage(): Promise<JSX.Element> {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCellsAll dns={alldns} deleteDns={handleDeleteDns} />
-            </TableRow>
+            <TableCellsAll dns={alldns} deleteDns={handleDeleteDns} />
           </TableBody>
         </Table>
       </CardContent>

@@ -52,11 +52,18 @@ export interface ResultInfo {
   total_pages: number
 }
 
+interface CloudflareError {
+  code: number
+  message: string
+}
+
 export interface DNSCreate {
-  result: Result
   success: boolean
-  errors?: null[] | null
-  messages?: null[] | null
+  errors?: CloudflareError[]
+  result: {
+    id: string
+    zone_id: string
+  }
 }
 
 export interface Result {

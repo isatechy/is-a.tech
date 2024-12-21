@@ -14,7 +14,12 @@ import auth from "@/lib/auth"
 export async function createNewDns(
   rawInput: DnsSchemaCompleted
 ): Promise<
-  "invalid-input" | "not-found" | "error" | "success" | "user-notFound"
+  | "invalid-input"
+  | "not-found"
+  | "error"
+  | "success"
+  | "user-notFound"
+  | "already-exists"
 > {
   const validatedInput = dnsSchemaCompleted.safeParse(rawInput)
 
@@ -78,12 +83,21 @@ export async function createNewDns(
     data = (await result.json()) as DNSCreate
 
     if (data.success === false) {
+      const alreadyExistsError = data.errors?.find(
+        (error) => error?.code === 81053
+      )
+
       await prisma.error.create({
         data: {
           message: `[dnsRecord cloudflare] - ${session.user.email}  ${JSON.stringify(data)}`,
           createdAt: new Date(),
         },
       })
+
+      if (alreadyExistsError) {
+        return "already-exists"
+      }
+
       return "invalid-input"
     }
   } catch (error) {
@@ -112,8 +126,8 @@ export async function createNewDns(
         createdAt: new Date(),
       },
     })
-
-    throw new Error("Error resending email verification link")
+    console.log("Error adding dns record", error)
+    throw new Error("Error adding dns record")
   }
 }
 

@@ -1,6 +1,5 @@
 "use client"
 
-import { Fragment } from "react"
 import type Prisma from "@prisma/client"
 
 import { Badge } from "@/components/ui/badge"
@@ -14,7 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { TableCell } from "@/components/ui/table"
+import { TableCell, TableRow } from "@/components/ui/table"
 import { Icons } from "@/components/icons"
 
 const TableCellsAll = ({
@@ -26,28 +25,32 @@ const TableCellsAll = ({
 }) => {
   if (dns === "not-found") {
     return (
-      <TableCell colSpan={5} className=" p-0">
-        <div className="flex flex-col items-center justify-center gap-2 space-x-2 border border-dashed border-primary/30 bg-primary/10 p-6">
-          <Icons.alertCircle className="size-8" />
-          <span>No DNS records found</span>
-        </div>
-      </TableCell>
+      <TableRow>
+        <TableCell colSpan={5} className=" p-0">
+          <div className="flex flex-col items-center justify-center gap-2 space-x-2 border border-dashed border-primary/30 bg-primary/10 p-6">
+            <Icons.alertCircle className="size-8" />
+            <span>No DNS records found</span>
+          </div>
+        </TableCell>
+      </TableRow>
     )
   }
 
   if (dns === "error") {
     return (
-      <TableCell colSpan={5}>
-        <div className="flex flex-col items-center justify-center gap-2 space-x-2 border border-dashed border-primary/30 bg-primary/10 p-6">
-          <Icons.ghost className="size-8" />
-          <span>Failed to fetch DNS records</span>
-        </div>
-      </TableCell>
+      <TableRow>
+        <TableCell colSpan={5}>
+          <div className="flex flex-col items-center justify-center gap-2 space-x-2 border border-dashed border-primary/30 bg-primary/10 p-6">
+            <Icons.ghost className="size-8" />
+            <span>Failed to fetch DNS records</span>
+          </div>
+        </TableCell>
+      </TableRow>
     )
   }
 
   return dns.map((dns) => (
-    <Fragment key={dns.id}>
+    <TableRow key={dns.id}>
       <TableCell className="font-medium">{`${dns.name}.${dns.domain}`}</TableCell>
       <TableCell>
         <Badge variant="outline">{dns.type}</Badge>
@@ -86,7 +89,7 @@ const TableCellsAll = ({
           </DropdownMenuContent>
         </DropdownMenu>
       </TableCell>
-    </Fragment>
+    </TableRow>
   ))
 }
 
