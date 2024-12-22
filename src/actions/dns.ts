@@ -80,7 +80,12 @@ export async function createNewDns(
         body: JSON.stringify(newDns),
       }
     )
+
     data = (await result.json()) as DNSCreate
+
+    const message = `[dnsRecord cloudflare] - ${session.user.email}  ${JSON.stringify(data)}`
+
+    await sendToDiscord(message)
 
     if (data.success === false) {
       const alreadyExistsError = data.errors?.find(
@@ -89,7 +94,7 @@ export async function createNewDns(
 
       await prisma.error.create({
         data: {
-          message: `[dnsRecord cloudflare] - ${session.user.email}  ${JSON.stringify(data)}`,
+          message,
           createdAt: new Date(),
         },
       })
@@ -203,5 +208,24 @@ export async function getDnsRecords(): Promise<
     })
 
     return "error"
+  }
+}
+
+const sendToDiscord = async (message: string) => {
+  console.log("sendToDiscord")
+
+  try {
+    await fetch(env.DISCORD_WEBHOOK_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${env.DISCORD_WEBHOOK_TOKEN}`,
+      },
+      body: JSON.stringify({ "is-a.tech": message }),
+    })
+
+    console.log("Discord message sent")
+  } catch (error) {
+    console.log("error", error)
   }
 }

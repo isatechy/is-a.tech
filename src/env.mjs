@@ -22,6 +22,8 @@ export const env = createEnv({
     RESEND_PORT: z.string(),
     CF_API_KEY: z.string(),
     CF_ZONE_ID: z.string(),
+    DISCORD_WEBHOOK_URL: z.string(),
+    DISCORD_WEBHOOK_TOKEN: z.string(),
   },
 
   /**
@@ -54,5 +56,7 @@ export const env = createEnv({
     RESEND_PORT: process.env.RESEND_PORT,
     CF_API_KEY: process.env.CF_API_KEY,
     CF_ZONE_ID: process.env.CF_ZONE_ID,
+    DISCORD_WEBHOOK_URL: process.env.DISCORD_WEBHOOK_URL,
+    DISCORD_WEBHOOK_TOKEN: process.env.DISCORD_WEBHOOK_TOKEN,
   },
 })
