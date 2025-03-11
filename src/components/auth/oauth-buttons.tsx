@@ -9,8 +9,8 @@ import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 
 const callbacksURLforOAuth = {
-  google: "/api/auth/signin/google",
-  github: "/api/auth/signin/github",
+  google: "/api/auth/callback/google",
+  github: "/api/auth/callback/github",
 }
 
 export function OAuthButtons(): JSX.Element {
