@@ -3,6 +3,8 @@
 import * as React from "react"
 import { signIn } from "next-auth/react"
 
+import { env } from "@/env.mjs"
+
 import { useToast } from "@/hooks/use-toast"
 
 import { Button } from "@/components/ui/button"
@@ -19,9 +21,13 @@ export function OAuthButtons(): JSX.Element {
   async function handleOAuthSignIn(
     provider: "google" | "github"
   ): Promise<void> {
+    console.log(
+      "callbacksURLforOAuth[provider]",
+      env.NEXT_PUBLIC_APP_URL + callbacksURLforOAuth[provider]
+    )
     try {
       await signIn(provider, {
-        callbackUrl: callbacksURLforOAuth[provider],
+        callbackUrl: env.NEXT_PUBLIC_APP_URL + callbacksURLforOAuth[provider],
       })
 
       toast({
