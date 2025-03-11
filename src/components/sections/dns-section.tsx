@@ -8,7 +8,7 @@ export function DnsSection(): JSX.Element {
     <section
       id="contact-section"
       aria-label="contact section"
-      className="flex size-full items-center justify-center  "
+      className="flex size-full items-center justify-center"
     >
       <div className="container grid max-w-4xl grid-cols-1 justify-center gap-8 md:gap-16">
         <div className="flex flex-col items-center gap-6 text-center">

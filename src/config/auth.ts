@@ -24,6 +24,7 @@ export default {
       clientId: env.GITHUB_ID,
       clientSecret: env.GITHUB_SECRET,
       allowDangerousEmailAccountLinking: true,
+      redirectUri: `${env.NEXT_PUBLIC_APP_URL}/api/auth/callback/github`,
     }),
     CredentialsProvider({
       async authorize(rawCredentials) {

@@ -3,12 +3,15 @@
 import * as React from "react"
 import { signIn } from "next-auth/react"
 
-import { DEFAULT_SIGNIN_REDIRECT } from "@/config/defaults"
-
 import { useToast } from "@/hooks/use-toast"
 
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
+
+const callbacksURLforOAuth = {
+  google: "/api/auth/signin/google",
+  github: "/api/auth/signin/github",
+}
 
 export function OAuthButtons(): JSX.Element {
   const { toast } = useToast()
@@ -18,7 +21,7 @@ export function OAuthButtons(): JSX.Element {
   ): Promise<void> {
     try {
       await signIn(provider, {
-        callbackUrl: DEFAULT_SIGNIN_REDIRECT,
+        callbackUrl: callbacksURLforOAuth[provider],
       })
 
       toast({

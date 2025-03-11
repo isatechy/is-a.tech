@@ -13,7 +13,7 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
-  debug: env.NODE_ENV === "development",
+  // debug: env.NODE_ENV === "development",
   pages: {
     signIn: "/signin",
     signOut: "/signout",
