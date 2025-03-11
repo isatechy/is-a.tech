@@ -21,13 +21,9 @@ export function OAuthButtons(): JSX.Element {
   async function handleOAuthSignIn(
     provider: "google" | "github"
   ): Promise<void> {
-    console.log(
-      "callbacksURLforOAuth[provider]",
-      env.NEXT_PUBLIC_APP_URL + callbacksURLforOAuth[provider]
-    )
     try {
       await signIn(provider, {
-        callbackUrl: env.NEXT_PUBLIC_APP_URL + callbacksURLforOAuth[provider],
+        callbackUrl: env.NEXT_PUBLIC_APP_URL,
       })
 
       toast({
